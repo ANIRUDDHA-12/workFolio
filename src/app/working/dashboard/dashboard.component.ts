@@ -1,45 +1,39 @@
 import { Component, OnInit } from '@angular/core';
+import { LogTaskService, Task } from '../services/log-task.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  totalTasks: number = 0;
-  totalHours: number = 0.0;
-  activeSubjects: number = 0;
-  userName: string = '';
+  userName = 'User'; // Replace or fetch from auth
+  tasks: Task[] = [];
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private logTaskService: LogTaskService, private router: Router) {}
 
-  ngOnInit() {
-    // Get user data from AuthService
-    const user = this.authService.currentUserValue;
+  ngOnInit(): void {
+    this.tasks = this.logTaskService.getTasks();
+  }
 
-    if (user && user.name) {
-      this.userName = user.name;
-    } else if (user && user.email) {
-      // Fallback: extract name from email
-      this.userName = user.email.split('@')[0];
-    } else {
-      // Final fallback if no user info
-      this.userName = localStorage.getItem('loggedInUsername') || 'User';
-    }
+  get totalTasks(): number {
+    return this.tasks.length;
+  }
+
+  get totalHours(): number {
+    return this.tasks.reduce((sum, task) => sum + task.hours, 0);
+  }
+
+  get activeSubjects(): number {
+    return new Set(this.tasks.map(task => task.subject)).size;
   }
 
   logFirstTask() {
-    console.log('Log first task clicked');
     this.router.navigate(['/log-task']);
   }
 
-  navigateToTab(tab: string) {
-    console.log('Navigate to:', tab);
-  }
-
   logout() {
-    this.authService.logout();
+    // Implement logout logic (e.g., clear token, redirect)
+    this.router.navigate(['/login']);
   }
 }

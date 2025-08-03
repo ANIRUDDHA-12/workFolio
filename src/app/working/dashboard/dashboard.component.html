@@ -1,15 +1,16 @@
 <div class="faculty-tracker">
+  <!-- Header Section -->
   <header class="header">
     <div class="header-content">
       <div class="header-left">
         <div class="graduation-cap-icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
             <path d="M12 3L1 9L12 15L21 9V16H23V9L12 3Z" fill="white"/>
             <path d="M5 13.18V17.18C5 17.97 5.63 18.74 6.4 19.09C8.61 20.15 10.26 20.73 12 20.73C13.74 20.73 15.39 20.15 17.6 19.09C18.37 18.74 19 17.97 19 17.18V13.18L12 17L5 13.18Z" fill="white"/>
           </svg>
         </div>
         <div class="header-text">
-          <h1>Welcome {{userName}}</h1>
+          <h1>Welcome, {{ userName }}</h1>
           <p>Track your academic activities and monitor workload efficiently</p>
         </div>
       </div>
@@ -17,7 +18,7 @@
         <div class="user-profile">
           <span class="user-name">Welcome, {{ userName }}</span>
           <button class="logout-btn" (click)="logout()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M16 17l5-5-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               <path d="M21 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -25,45 +26,18 @@
             Logout
           </button>
         </div>
-        <!-- <div class="database-icon">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="12" cy="5" rx="9" ry="3" stroke="#2563eb" stroke-width="2" fill="#3b82f6"/>
-            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" stroke="#2563eb" stroke-width="2"/>
-            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" stroke="#2563eb" stroke-width="2"/>
-          </svg>
-        </div> -->
       </div>
     </div>
   </header>
 
+  <!-- Navigation -->
   <nav class="navigation">
-    <div class="nav-item" routerLink="/dashboard" class="nav-item active">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="3" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" fill="currentColor"/>
-        <rect x="14" y="3" width="7" height="7" stroke="currentColor" stroke-width="2" fill="currentColor"/>
-        <rect x="14" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" fill="currentColor"/>
-        <rect x="3" y="14" width="7" height="7" stroke="currentColor" stroke-width="2" fill="currentColor"/>
-      </svg>
-      Dashboard
-    </div>
-    <div class="nav-item" routerLink="/log-task" routerLinkActive="active">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" fill="none"/>
-        <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2" fill="none"/>
-        <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/>
-        <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/>
-        <polyline points="10,9 9,9 8,9" stroke="currentColor" stroke-width="2"/>
-      </svg>
-      Log Task
-    </div>
-    <div class="nav-item" routerLink="/analytics" routerLinkActive="active">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polyline points="22,12 18,12 15,21 9,3 6,12 2,12" stroke="currentColor" stroke-width="2" fill="none"/>
-      </svg>
-      Analytics
-    </div>
+    <div class="nav-item" routerLink="/dashboard" routerLinkActive="active">Dashboard</div>
+    <div class="nav-item" routerLink="/log-task" routerLinkActive="active">Log Task</div>
+    <div class="nav-item" routerLink="/analytics" routerLinkActive="active">Analytics</div>
   </nav>
 
+  <!-- Stats Section -->
   <div class="stats-container">
     <div class="stat-card">
       <h3>Total Tasks</h3>
@@ -79,24 +53,46 @@
     </div>
   </div>
 
+  <!-- Recent Tasks Section -->
   <div class="recent-tasks-section">
     <div class="section-header">
       <h2>Recent Tasks</h2>
-      <span class="task-count">0 of 0 tasks</span>
+      <span class="task-count">{{ tasks.length }} task(s)</span>
     </div>
 
-    <div class="empty-state">
+    <!-- Show empty state if no tasks -->
+    <div *ngIf="tasks.length === 0" class="empty-state">
       <div class="graduation-cap-icon-large">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
           <path d="M12 3L1 9L12 15L21 9V16H23V9L12 3Z" fill="#9ca3af"/>
           <path d="M5 13.18V17.18C5 17.97 5.63 18.74 6.4 19.09C8.61 20.15 10.26 20.73 12 20.73C13.74 20.73 15.39 20.15 17.6 19.09C18.37 18.74 19 17.97 19 17.18V13.18L12 17L5 13.18Z" fill="#9ca3af"/>
         </svg>
       </div>
       <h3>No tasks logged yet</h3>
       <p>Start by logging your first academic activity</p>
-      <button class="log-task-btn" (click)="logFirstTask()">
-        Log Your First Task
-      </button>
+      <button class="log-task-btn" (click)="logFirstTask()">Log Your First Task</button>
     </div>
+
+    <!-- Show task table if tasks exist -->
+    <table *ngIf="tasks.length > 0" class="task-table">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Work Type</th>
+          <th>Hours</th>
+          <th>Date</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks | slice:-5"> <!-- Show last 5 -->
+          <td>{{ task.subject }}</td>
+          <td>{{ task.workType }}</td>
+          <td>{{ task.hours }}h</td>
+          <td>{{ task.date | date: 'mediumDate' }}</td>
+          <td>{{ task.description || '-' }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
