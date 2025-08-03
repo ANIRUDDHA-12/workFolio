@@ -12,13 +12,20 @@ export interface Task {
   providedIn: 'root'
 })
 export class LogTaskService {
-  private tasks: Task[] = [];
+  private storageKey = 'userTasks';
 
   getTasks(): Task[] {
-    return this.tasks;
+    const data = localStorage.getItem(this.storageKey);
+    return data ? JSON.parse(data) : [];
   }
 
   setTasks(tasks: Task[]): void {
-    this.tasks = tasks;
+    localStorage.setItem(this.storageKey, JSON.stringify(tasks));
+  }
+
+  addTask(task: Task): void {
+    const tasks = this.getTasks();
+    tasks.push(task);
+    this.setTasks(tasks);
   }
 }
