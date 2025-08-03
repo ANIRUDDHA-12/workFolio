@@ -239,10 +239,134 @@ html, body {
   margin: 0;
 }
 
+.task-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .task-count {
   font-size: 0.875rem;
   color: #64748b;
   font-weight: 500;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.share-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  color: white;
+}
+
+.share-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.share-btn.whatsapp {
+  background-color: #25D366;
+}
+
+.share-btn.whatsapp:hover {
+  background-color: #128C7E;
+}
+
+.share-btn.email {
+  background-color: #4285F4;
+}
+
+.share-btn.email:hover {
+  background-color: #3367D6;
+}
+
+.share-btn[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Back Button Styles */
+.back-button-container {
+  padding: 16px 16px 0 16px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  color: #64748b;
+}
+
+.back-button:hover {
+  background-color: #f1f5f9;
+  color: #3b82f6;
+}
+
+.back-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* PDF Button Styles */
+.pdf-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background-color: #ef4444;
+  color: white;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.pdf-btn:hover {
+  background-color: #dc2626;
+  transform: translateY(-1px);
+}
+
+.pdf-btn[disabled] {
+  background-color: #f87171;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 .empty-state {
@@ -450,6 +574,22 @@ html, body {
     flex-direction: column;
     gap: 8px;
     align-items: flex-start;
+  }
+  
+  .task-header-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  .share-buttons {
+    width: 100%;
+  }
+  
+  .share-btn {
+    flex: 1;
+    justify-content: center;
   }
   
   .empty-state {

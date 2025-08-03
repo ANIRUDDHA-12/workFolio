@@ -5,6 +5,36 @@
   min-height: 100vh;
 }
 
+/* Back Button Styles */
+.back-button-container {
+  padding: 16px 16px 0 16px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  color: #64748b;
+}
+
+.back-button:hover {
+  background-color: #f1f5f9;
+  color: #3b82f6;
+}
+
+.back-button svg {
+  width: 16px;
+  height: 16px;
+}
+
 .analytics-header {
   margin-bottom: 24px;
   text-align: center;
